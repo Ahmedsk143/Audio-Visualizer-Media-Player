@@ -1,0 +1,389 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: Cairo, sans-serif;
+  /* background-color: #2b2c36; */
+  background-color: #c9c9c9;
+
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidenav styles */
+aside.sidenav {
+  display: flex;
+  flex-direction: column;
+  background-color: #0c0d14;
+  color: #fff;
+  height: calc(100% - 96px);
+  overflow-y: scroll;
+}
+#logo {
+  text-align: center;
+  padding: 20px 0px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.521);
+}
+.search-box {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-template-rows: 1fr;
+  align-items: center;
+}
+.search-box input {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: #0c0d14;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+.search-box input:focus {
+  outline: none;
+}
+.search-box .icon {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  color: #0c0d14;
+}
+.accord {
+  transition: all 0.4s linear;
+}
+.accord .artist {
+  display: grid;
+  grid-template-columns: 35px 1fr 30px;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+}
+.accord .artist .icon-1 {
+  font-size: 22px;
+}
+.accord .artist .icon-2 {
+  font-size: 18px;
+  transition: all 0.4s linear;
+}
+.accord.active .icon-2 {
+  transform: rotateX(180deg);
+}
+.accord .audios {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0px 20px;
+  overflow: hidden;
+  height: 0px;
+  transition: all 0.5s linear;
+}
+.accord.active .audios {
+  height: 100%;
+}
+.accord .audios .audio {
+  line-height: 1.8;
+  display: flex;
+  cursor: pointer;
+  text-align: start;
+}
+.accord .audios .audio span {
+  transition: all 0.2s;
+}
+.accord .audios .audio span:last-child:hover {
+  color: rgba(69, 132, 250, 0.685);
+}
+.accord .audios .audio span:first-child {
+  color: rgba(255, 255, 255, 0.685);
+  margin-right: 10px;
+}
+.explored {
+  margin: 20px 0 30px 0;
+}
+aside.sidenav::-webkit-scrollbar {
+  width: 8px;
+}
+
+aside.sidenav::-webkit-scrollbar-track {
+  background-color: #0c0d14;
+}
+
+aside.sidenav::-webkit-scrollbar-thumb {
+  background: #373b44;
+}
+aside.sidenav::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+}
+aside.sidenav #upload {
+  display: none;
+}
+aside.sidenav #upload + label {
+  background-color: #fff;
+  color: #0c0d14;
+  padding: 8px;
+  border-radius: 5px;
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 7px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: 1px solid #0c0d14;
+}
+aside.sidenav #upload + label:hover {
+  background-color: #0c0d14;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/** visualizer styles*/
+.visualizer {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 112px;
+}
+.visualizer #canvas {
+  filter: blur(4px);
+}
+.visualizer .random {
+  height: 65px;
+  width: 65px;
+  position: absolute;
+  right: 50px;
+  top: 33px;
+  z-index: 100;
+  background-color: #444444;
+  border-radius: 50%;
+  border: 4px solid #797979;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.visualizer .random.active {
+  animation: rotate 1s;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.visualizer .random:hover {
+  transform: scale(1.2);
+}
+.visualizer svg {
+  font-size: 30px;
+  width: 30px;
+  height: 50px;
+  color: #fff;
+  transform: translate(-1px, -2px);
+}
+
+/* Explore artists deleted */
+/* .explore {
+  padding: 40px;
+}
+.explore h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.explore .artists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.explore .artists .artist {
+  width: 300px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: center;
+  column-gap: 20px;
+  cursor: pointer;
+}
+.explore .artists .artist img {
+  width: 100%;
+} */
+
+/** Media player styles */
+.player {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  align-items: center;
+  box-shadow: inset 0px 5px 8px -5px rgb(255 255 255 / 23%);
+  overflow: hidden;
+  padding: 22px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: #2b2c36; */
+  background-color: #0c0d14;
+}
+.player .info {
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0px 0px 10px #fff;
+  text-align: center;
+}
+.player .player-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+.player .player-container .controls {
+  display: grid;
+  grid-template-columns: 50px 50px 1fr 20px 1fr 100px;
+  align-items: center;
+  column-gap: 20px;
+  color: #fff;
+  font-size: 24px;
+}
+.player .player-container .controls > div {
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.player .player-container .controls > div:hover {
+  color: #8f8f8f;
+}
+.player .player-container .controls .play-wrapper #play {
+  display: block;
+}
+.player .player-container .controls .play-wrapper.playing #play {
+  display: none;
+}
+.player .player-container .controls .play-wrapper #pause {
+  display: none;
+}
+.player .player-container .controls .play-wrapper.playing #pause {
+  display: block;
+}
+.player .player-container .controls #prev {
+  justify-self: end;
+}
+.player .player-container .controls #next {
+  justify-self: start;
+}
+.player .player-container .controls #volume {
+  display: flex;
+  column-gap: 10px;
+}
+.player .player-container .controls #volume input[type="range"] {
+  width: 80px;
+  overflow: hidden;
+  transition: all 0.5s ease-out;
+  margin-top: auto;
+}
+/* .player .player-container .controls #volume:hover input {
+  width: 80px;
+} */
+.player .player-container .controls #volume .mute {
+  display: none;
+  /* color: #2b2c36; */
+}
+.player .player-container .controls #volume.active .mute {
+  display: block;
+}
+.player .player-container .controls #volume .normal {
+  display: block;
+}
+.player .player-container .controls #volume.active .normal {
+  display: none;
+}
+
+.player .player-container .controls #autoplay {
+  margin-right: auto;
+  height: 20px;
+  width: 50px;
+  background-color: #8f8f8f;
+  border-radius: 50px;
+}
+.player .player-container .controls #autoplay.active {
+  background-color: #383838;
+}
+.player .player-container .controls #autoplay span {
+  display: block;
+  height: 30px;
+  width: 30px;
+  background-color: #383838;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #fff;
+  transition: all 0.4s;
+  transform: translateY(-5px);
+}
+.player .player-container .controls #autoplay.active span {
+  transform: translateY(-5px) translateX(80%);
+  background-color: #ffffff;
+  color: #383838;
+}
+.player .player-container .controls #autoplay span i:first-child {
+  display: none;
+}
+.player .player-container .controls #autoplay.active span i:first-child {
+  display: block;
+}
+.player .player-container .controls #autoplay span i:last-child {
+  display: block;
+}
+.player .player-container .controls #autoplay.active span i:last-child {
+  display: none;
+}
+.player .player-container .controls #repeat.active {
+  color: rgb(121, 121, 121);
+}
+.player .player-container .progress-wrapper {
+  height: 10px;
+  width: 60%;
+  border-radius: 10px;
+  background-color: #444444;
+  margin: 0 auto;
+}
+.player .player-container .progress-wrapper .time-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.603);
+}
+.player .player-container .progress-wrapper .time-wrapper #current {
+  transform: translate(-45px, -24px);
+}
+.player .player-container .progress-wrapper .time-wrapper #duration {
+  transform: translate(50px, -24px);
+}
+.player .player-container .progress-wrapper {
+  cursor: pointer;
+}
+.player .player-container .progress-wrapper #progress {
+  height: 10px;
+  width: 0%;
+  border-radius: 5px;
+  background-color: #fff;
+}

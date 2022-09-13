@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://i.ibb.co/9G0TzRp/post-it.png"
+      type="image/x-icon"
+    />
+    <title>Halal Player</title>
+  </head>
+  <body>
+    <aside class="sidenav">
+      <h1 id="logo">Halal Player</h1>
+      <div class="search-box">
+        <input type="text" placeholder="Search" />
+        <i class="fa-solid fa-magnifying-glass icon"></i>
+      </div>
+      <div class="explored accord">
+        <h3 class="artist accord-trigger">
+          <i class="fa-regular fa-compass icon-1"></i>
+          <span class="name">Explore</span>
+          <i class="fa-solid fa-chevron-down icon-2"></i>
+        </h3>
+        <ul class="audios">
+          <li class="audio">
+            <span>01 </span>
+            <span>
+              Rahman ya Rahman Rahman ya Rahman Rahman ya Rahman Rahman ya
+              Rahman</span
+            >
+          </li>
+          <li class="audio">
+            <span>02 </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+          <li class="audio">
+            <span>03 </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+          <li class="audio">
+            <span>04 </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+        </ul>
+      </div>
+      <!-- <div class="library accord">
+        <h3 class="artist accord-trigger">
+          <span class="name"
+            ><i class="fa-solid fa-cloud icon-1"></i> Your library</span
+          >
+          <i class="fa-solid fa-chevron-down icon-2"></i>
+        </h3>
+        <ul class="audios">
+          <li class="audio">
+            <span>01. </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+          <li class="audio">
+            <span>01. </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+          <li class="audio">
+            <span>01. </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+          <li class="audio">
+            <span>01. </span>
+            <span> Rahman ya Rahman</span>
+          </li>
+        </ul>
+      </div> -->
+      <input type="file" id="upload" acceept="audio/*" />
+      <label for="upload">
+        <i class="fa-solid fa-cloud icon-1"></i> Upload audio</label
+      >
+    </aside>
+    <div class="visualizer">
+      <div class="random">
+        <svg viewBox="0 0 30 30 ">
+          <path
+            fill="currentcolor"
+            fill-rule="nonzero"
+            stroke="none"
+            stroke-width="1"
+            d="M7.38 5.555l15.592-1.367A3.419 3.419 0 0126.673 7.3L28.05 23.06a3.422 3.422 0 01-3.106 3.71L9.352 28.137a3.419 3.419 0 01-3.702-3.113L4.275 9.265a3.422 3.422 0 013.106-3.71zm.2 2.274a1.14 1.14 0 00-1.036 1.237l1.375 15.759a1.14 1.14 0 001.234 1.038l15.591-1.368a1.14 1.14 0 001.036-1.236l-1.376-15.76a1.14 1.14 0 00-1.234-1.037L7.58 7.829zm3.254 5.39a1.69 1.69 0 01-1.825-1.545 1.692 1.692 0 011.53-1.84 1.69 1.69 0 011.825 1.546 1.692 1.692 0 01-1.53 1.839zm10.065-.883a1.69 1.69 0 01-1.826-1.545 1.692 1.692 0 011.53-1.84 1.69 1.69 0 011.825 1.546 1.692 1.692 0 01-1.53 1.84zM11.72 23.373a1.69 1.69 0 01-1.825-1.545 1.692 1.692 0 011.53-1.84 1.69 1.69 0 011.825 1.545 1.692 1.692 0 01-1.53 1.84zm10.065-.883a1.69 1.69 0 01-1.825-1.545 1.692 1.692 0 011.53-1.84 1.69 1.69 0 011.825 1.546 1.692 1.692 0 01-1.53 1.84zm-5.476-4.635a1.69 1.69 0 01-1.825-1.546 1.692 1.692 0 011.53-1.839 1.69 1.69 0 011.825 1.545 1.692 1.692 0 01-1.53 1.84zM29.183 6.823l-.015.002A.915.915 0 0128.167 6c-.265-2.544-2.523-4.39-5.045-4.121h-.007a.916.916 0 01-1.002-.824.922.922 0 01.808-1.018h.002l.007-.001a6.387 6.387 0 014.718 1.408 6.498 6.498 0 012.347 4.363.922.922 0 01-.812 1.016zM8.547 32h-.008a6.395 6.395 0 01-4.578-1.818 6.51 6.51 0 01-1.96-4.553.92.92 0 01.895-.942h.016c.503-.008.917.4.926.91.044 2.559 2.134 4.595 4.67 4.55h.006a.918.918 0 01.927.91.92.92 0 01-.894.943z"
+          ></path>
+        </svg>
+      </div>
+      <canvas id="canvas" width="700px" height="500px"></canvas>
+    </div>
+    <!-- <div class="explore">
+        <h1><i class="fa-regular fa-compass"></i> Explore</h1>
+        <div class="artists">
+          <div class="artist">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg"
+              alt=""
+            />
+            <span class="name">Mashary Rashed</span>
+          </div>
+          <div class="artist">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg"
+              alt=""
+            />
+            <span class="name">Maher Zain</span>
+          </div>
+          <div class="artist">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg"
+              alt=""
+            />
+            <span class="name">Tobar</span>
+          </div>
+          <div class="artist">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg"
+              alt=""
+            />
+            <span class="name">Hamood </span>
+          </div>
+        </div>
+      </div> -->
+    <div class="player">
+      <div class="info"><span></span> - <span></span></div>
+      <div class="player-container">
+        <div class="controls">
+          <div id="autoplay" class="active" title="Auto play tracks">
+            <span>
+              <i class="fa-solid fa-play play"></i>
+              <i class="fa-solid fa-pause pause"></i>
+            </span>
+          </div>
+          <div id="repeat" title="Enable repeat">
+            <i class="fa-solid fa-repeat"></i>
+          </div>
+          <div id="prev" title="Previous">
+            <i class="fa-solid fa-backward-step"></i>
+          </div>
+          <div class="play-wrapper">
+            <i id="play" class="fa-solid fa-play play" title="Play"></i>
+            <i id="pause" class="fa-solid fa-pause pause" title="Pause"></i>
+          </div>
+          <div id="next" title="Next">
+            <i class="fa-solid fa-forward-step"></i>
+          </div>
+          <div id="volume" title="Volume">
+            <i class="fa-solid fa-volume-xmark mute"></i>
+            <i class="fa-solid fa-volume-low normal"></i>
+            <input
+              type="range"
+              id="volume-range"
+              min="-1"
+              max="2"
+              value="1"
+              step="0.01"
+            />
+          </div>
+        </div>
+        <div class="progress-wrapper" title="Seek">
+          <div id="progress"></div>
+          <div class="time-wrapper">
+            <span id="current">0:00</span>
+            <span id="duration">0:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
