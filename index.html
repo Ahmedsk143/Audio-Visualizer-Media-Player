@@ -14,76 +14,52 @@
     />
     <link
       rel="shortcut icon"
-      href="https://i.ibb.co/9G0TzRp/post-it.png"
+      href="https://www.kindpng.com/picc/m/12-126102_music-wave-png-audio-wave-icon-png-transparent.png"
       type="image/x-icon"
     />
-    <title>Halal Player</title>
+    <title>Audio visualizer</title>
   </head>
   <body>
     <aside class="sidenav">
-      <h1 id="logo">Halal Player</h1>
-      <div class="search-box">
+      <div id="menu-toggle"><span></span></div>
+      <h1 id="logo">Visualize Your Track</h1>
+      <!-- <div class="search-box">
         <input type="text" placeholder="Search" />
         <i class="fa-solid fa-magnifying-glass icon"></i>
-      </div>
-      <div class="explored accord">
+      </div> -->
+      <input type="file" id="upload" acceept="audio/*" />
+      <label for="upload">
+        <i class="fa-solid fa-cloud icon-1"></i> Upload audio</label
+      >
+      <div class="explored accord active">
         <h3 class="artist accord-trigger">
           <i class="fa-regular fa-compass icon-1"></i>
           <span class="name">Explore</span>
           <i class="fa-solid fa-chevron-down icon-2"></i>
         </h3>
         <ul class="audios">
-          <li class="audio">
+          <li class="audio" data-audio="0">
             <span>01 </span>
-            <span>
-              Rahman ya Rahman Rahman ya Rahman Rahman ya Rahman Rahman ya
-              Rahman</span
-            >
+            <span> علي مقام الكرد - مشاري </span>
           </li>
-          <li class="audio">
+          <li class="audio" data-audio="1">
             <span>02 </span>
-            <span> Rahman ya Rahman</span>
+            <span> ربنا رب القلوب - مشاري </span>
           </li>
-          <li class="audio">
+          <li class="audio" data-audio="2">
             <span>03 </span>
-            <span> Rahman ya Rahman</span>
+            <span>أعمارنا اعمالنا - ماهر زين</span>
           </li>
-          <li class="audio">
+          <li class="audio" data-audio="3">
             <span>04 </span>
-            <span> Rahman ya Rahman</span>
+            <span>اذا المرء لم يرضى</span>
+          </li>
+          <li class="audio" data-audio="4">
+            <span>05 </span>
+            <span> صلوا عليه شفيع الامة</span>
           </li>
         </ul>
       </div>
-      <!-- <div class="library accord">
-        <h3 class="artist accord-trigger">
-          <span class="name"
-            ><i class="fa-solid fa-cloud icon-1"></i> Your library</span
-          >
-          <i class="fa-solid fa-chevron-down icon-2"></i>
-        </h3>
-        <ul class="audios">
-          <li class="audio">
-            <span>01. </span>
-            <span> Rahman ya Rahman</span>
-          </li>
-          <li class="audio">
-            <span>01. </span>
-            <span> Rahman ya Rahman</span>
-          </li>
-          <li class="audio">
-            <span>01. </span>
-            <span> Rahman ya Rahman</span>
-          </li>
-          <li class="audio">
-            <span>01. </span>
-            <span> Rahman ya Rahman</span>
-          </li>
-        </ul>
-      </div> -->
-      <input type="file" id="upload" acceept="audio/*" />
-      <label for="upload">
-        <i class="fa-solid fa-cloud icon-1"></i> Upload audio</label
-      >
     </aside>
     <div class="visualizer">
       <div class="random">
@@ -162,7 +138,7 @@
               type="range"
               id="volume-range"
               min="-1"
-              max="2"
+              max="1"
               value="1"
               step="0.01"
             />

@@ -1,20 +1,3 @@
-// At the start
-fetchAudios();
-let audios = JSON.parse(localStorage.getItem("audios"));
-let selectedAudio = 0;
-// Fetch at start function
-function fetchAudios() {
-  const fetchedAudios = [
-    {
-      title: "رحمن يا رحمن",
-      src: "Mashary.mp3",
-    },
-    { title: "ربنا رب القلوب", src: "god of hearts.mp3" },
-    { title: "طلع البدر علينا", src: "Albdr.mp3" },
-  ];
-  localStorage.setItem("audios", JSON.stringify(fetchedAudios));
-}
-
 const file = document.getElementById("upload");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -35,6 +18,7 @@ const progressBar = document.querySelector("#progress");
 const currentTimeEl = document.querySelector(".time-wrapper #current");
 const durationEl = document.querySelector(".time-wrapper #duration");
 const volumeControl = document.querySelector("#volume-range");
+const tracks = document.querySelectorAll(".explored .audios .audio");
 
 let audio = new Audio();
 // Aduio controls event listeners
@@ -54,7 +38,25 @@ volumeControl.addEventListener("input", () => {
   gainNode.gain.value = volumeControl.value;
 });
 file.addEventListener("change", fileUploaded);
-
+tracks.forEach((track) => {
+  track.addEventListener("click", () => {
+    selectedAudio = track.getAttribute("data-audio");
+    loadAudio(selectedAudio);
+    playAudio();
+    menuTrigger.parentElement.classList.toggle("collapsed");
+  });
+});
+let audios = [
+  {
+    title: " علي مقام الكرد - مشاري ",
+    src: "track1.mp3",
+  },
+  { title: " ربنا رب القلوب - مشاري ", src: "track2.mp3" },
+  { title: "أعمارنا اعمالنا - ماهر زين", src: "track3.mp3" },
+  { title: "اذا المرء لم يرضى", src: "track4.mp3" },
+  { title: "صلوا عليه شفيع الامة", src: "track5.mp3" },
+];
+let selectedAudio = 0;
 loadAudio(0);
 let autoPlay = true;
 const audioCtx = new AudioContext();
@@ -63,8 +65,7 @@ const gainNode = audioCtx.createGain();
 let audioSource = audioCtx.createMediaElementSource(audio);
 audioSource.connect(analyser).connect(audioCtx.destination);
 audioSource.connect(gainNode).connect(audioCtx.destination);
-let fftSizeactor = 2048;
-analyser.fftSize = fftSizeactor;
+analyser.fftSize = 256;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 if (audioCtx.state === "suspended") {
@@ -73,32 +74,129 @@ if (audioCtx.state === "suspended") {
 
 // The actuall drawing
 // canvas.clientWidth / bufferLength
-let barWidthFactor = 15;
-const barWidth = barWidthFactor;
+let barWidth = 15;
 let barHeight;
 let x; // it represents the x-offset, used to create bars next to each other
+const particles = new Image();
+const center = new Image();
 
+particles.src = "https://www.freeiconspng.com/uploads/snow-png-10.png";
+center.src = "https://www.freeiconspng.com/uploads/blue-heart-icon-png-17.png";
+let num = 1;
 function animate() {
   x = 0;
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  if (num == 1) {
+    drawVisualizer1(barHeight, barWidth, bufferLength, dataArray);
+  } else if (num == 2) {
+    canvas.clientWidth = 2000;
+    barWidth = canvas.clientWidth / 2 / bufferLength;
+    drawVisualizer2(barHeight, barWidth, bufferLength, dataArray);
+  } else if (num == 3) {
+    drawVisualizer3(barHeight, barWidth, bufferLength, dataArray);
+  } else if (num == 4) {
+    drawVisualizer4(barHeight, barWidth, bufferLength, dataArray);
+  }
   analyser.getByteFrequencyData(dataArray);
-  drawVisualizer(barHeight, barWidth, bufferLength, dataArray);
-  requestAnimationFrame(animate);
+  requestID = requestAnimationFrame(animate);
 }
-function drawVisualizer(barHeight, barWidth, bufferLength, dataArray) {
+function drawVisualizer1(barHeight, barWidth, bufferLength, dataArray) {
+  ctx.lineCap = "";
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  ctx.shadowBlur = 0;
+  ctx.shadowColor = "";
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 1.5;
+    barHeight = dataArray[i] * 0.7;
     ctx.save();
     ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
-    ctx.rotate(i + Math.PI * 2);
-    const hue = 200 + i * 0.1;
+    ctx.rotate(i * 4);
+    ctx.drawImage(particles, 0, barHeight, barHeight / 2.5, barHeight / 2.5);
+    x += barWidth;
+    ctx.restore();
+  }
+  let size = dataArray[15] * 1.5 > 100 ? dataArray[15] : 100;
+  ctx.drawImage(
+    center,
+    canvas.clientWidth / 2 - size / 2,
+    canvas.clientHeight / 2 - size / 2,
+    size,
+    size
+  );
+}
+function drawVisualizer2(barHeight, barWidth, bufferLength, dataArray) {
+  ctx.lineCap = "";
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  ctx.shadowBlur = 0;
+  ctx.shadowColor = "";
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 1.3;
+    const hue = 5 + i * 2;
     ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
-    // ctx.fillStyle = `#0c0d14`;
-    // ctx.fillRect(0, 0, barWidth, barHeight);
+    ctx.fillRect(
+      canvas.clientWidth / 2 - x,
+      canvas.clientHeight - barHeight,
+      barWidth,
+      barHeight
+    );
+    x += barWidth;
+  }
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 1.3;
+    const hue = 5 + i * 2;
+    ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.fillRect(x, canvas.clientHeight - barHeight, barWidth, barHeight);
+    x += barWidth;
+  }
+}
+function drawVisualizer3(barHeight, barWidth, bufferLength, dataArray) {
+  ctx.lineCap = "square";
+  ctx.shadowOffsetX = 5;
+  ctx.shadowOffsetY = 5;
+  ctx.shadowBlur = 5;
+  ctx.shadowColor = "black";
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 0.8;
+    ctx.save();
+    ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.rotate(i * 10);
+
+    ctx.lineWidth = barHeight / 4;
+    ctx.strokeStyle = "rgba(150,150,150,1)";
     ctx.beginPath();
-    ctx.arc(70, barHeight / 10, barHeight / 2, 0, Math.PI / 2);
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, barHeight);
+    ctx.stroke();
+
+    ctx.lineWidth = barHeight / 5;
+    ctx.strokeStyle = "rgba(150,150,150,1)";
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, barHeight);
+    ctx.stroke();
+
+    x += barWidth;
+    ctx.restore();
+  }
+}
+function drawVisualizer4(barHeight, barWidth, bufferLength, dataArray) {
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 5;
+  ctx.shadowBlur = 0;
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 0.8;
+    ctx.save();
+    ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.rotate(i * bufferLength);
+    const hue = i * 2;
+    ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.beginPath();
+    ctx.arc(0, barHeight, barHeight / 10, 0, Math.PI * 2);
+    ctx.arc(0, barHeight / 1.5, barHeight / 10, 0, Math.PI * 2);
+    ctx.arc(0, barHeight / 2, barHeight / 60, 0, Math.PI * 2);
+    ctx.arc(0, barHeight / 3, barHeight / 80, 0, Math.PI * 2);
     ctx.fill();
-    // ctx.stroke();
     x += barWidth;
     ctx.restore();
   }
@@ -111,6 +209,13 @@ function loadAudio(audioIndex) {
   audio.currentTime = 0;
   audio.src = audios[audioIndex].src;
   audioName.textContent = audios[audioIndex].title;
+  tracks.forEach((track) => {
+    if (selectedAudio == track.getAttribute("data-audio")) {
+      track.classList.add("active");
+    } else {
+      track.classList.remove("active");
+    }
+  });
 }
 
 function playAudio() {
@@ -227,8 +332,11 @@ function randomEffect() {
   setTimeout(() => {
     randomBtn.classList.remove("active");
   }, 1000);
-  fftSizeactor = Math.floor(Math.random() * 20);
-  fftSizeactor += 32;
+  if (num < 4) {
+    num++;
+  } else {
+    num = 1;
+  }
 }
 
 // Sidenav accordion
@@ -237,4 +345,10 @@ accordTriggers.forEach((accord) => {
   accord.addEventListener("click", () => {
     accord.parentElement.classList.toggle("active");
   });
+});
+
+// menu toggle
+const menuTrigger = document.getElementById("menu-toggle");
+menuTrigger.addEventListener("click", () => {
+  menuTrigger.parentElement.classList.toggle("collapsed");
 });
