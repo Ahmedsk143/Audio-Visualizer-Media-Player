@@ -15,3 +15,13 @@ It is a cool audio visualizer with custom controls, you can upload your favioute
 * Repeat track toggle 
 * Auto play tracks toggle
 * Progress bar with seek on click
+## Responsive Design
+* ![Captured by Ahmed Khalil 378](https://user-images.githubusercontent.com/52580137/190304280-026551e4-123d-432c-bcab-77000166a645.png)
+* ![Captured by Ahmed Khalil 379](https://user-images.githubusercontent.com/52580137/190304414-92817e83-bc1c-4896-a698-5de754046dab.png)
+
+# Techonlogies
+* HTML5
+* CSS3
+* Javascript
+* Fontawesome
+* Google fonts
