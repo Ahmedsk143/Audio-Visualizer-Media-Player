@@ -1,4 +1,4 @@
-# Audio-Visualizer-Cutsom-Media-Controls
+# Audio Visualizer Media Player
 It is a cool audio visualizer with custom controls, you can upload your favioute track and start the visualization
 
 # Features
