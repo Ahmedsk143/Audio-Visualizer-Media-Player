@@ -49,12 +49,12 @@ tracks.forEach((track) => {
 let audios = [
   {
     title: " علي مقام الكرد - مشاري ",
-    src: "tracks/track1.mp3",
+    src: "track1.mp3",
   },
-  { title: " ربنا رب القلوب - مشاري ", src: "tracks/track2.mp3" },
-  { title: "أعمارنا اعمالنا - ماهر زين", src: "tracks/track3.mp3" },
-  { title: "اذا المرء لم يرضى", src: "tracks/track4.mp3" },
-  { title: "صلوا عليه شفيع الامة", src: "tracks/track5.mp3" },
+  { title: " ربنا رب القلوب - مشاري ", src: "track2.mp3" },
+  { title: "أعمارنا اعمالنا - ماهر زين", src: "track3.mp3" },
+  { title: "اذا المرء لم يرضى", src: "track4.mp3" },
+  { title: "صلوا عليه شفيع الامة", src: "track5.mp3" },
 ];
 let selectedAudio = 0;
 loadAudio(0);
