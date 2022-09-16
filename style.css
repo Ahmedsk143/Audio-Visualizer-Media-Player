@@ -457,9 +457,9 @@ aside.sidenav #upload + label:hover {
     row-gap: 20px;
   }
   .player .player-container .controls {
-    grid-template-columns: 35px 25px 1fr 11px 1fr 100px;
-    column-gap: 9px;
-    font-size: 20px;
+    grid-template-columns: 35px 25px 1fr 18px 1fr 100px;
+    column-gap: 16px;
+    font-size: 27px;
   }
   .player .player-container .controls #autoplay {
     height: 16px;
