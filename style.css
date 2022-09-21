@@ -202,12 +202,14 @@ aside.sidenav #upload + label:hover {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 112px;
-  padding-left: 50px;
-  width: 100vw;
-  height: 100vh;
+  width: calc(100vw - 250px);
+  height: calc(100vh - 112px);
+  margin-left: auto;
 }
+
 .visualizer #canvas {
+  width: 100%;
+  height: 100%;
 }
 .visualizer .random {
   height: 65px;
@@ -471,5 +473,9 @@ aside.sidenav #upload + label:hover {
   .player .player-container .controls #autoplay span {
     height: 20px;
     width: 20px;
+  }
+  .visualizer {
+    width: calc(100vw - 35px);
+    height: calc(100vh - 174px);
   }
 }

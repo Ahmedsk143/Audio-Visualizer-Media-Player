@@ -46,6 +46,13 @@ tracks.forEach((track) => {
     menuTrigger.parentElement.classList.toggle("collapsed");
   });
 });
+window.addEventListener("load", setCanvasDimensions);
+window.addEventListener("resize", setCanvasDimensions);
+
+function setCanvasDimensions() {
+  canvas.width = visualizerContainer.clientWidth;
+  canvas.height = visualizerContainer.clientHeight;
+}
 let audios = [
   {
     title: " علي مقام الكرد - مشاري ",
@@ -73,7 +80,7 @@ if (audioCtx.state === "suspended") {
 }
 
 // The actuall drawing
-// canvas.clientWidth / bufferLength
+// canvas.width / bufferLength
 let barWidth = 15;
 let barHeight;
 let x; // it represents the x-offset, used to create bars next to each other
@@ -85,12 +92,11 @@ center.src = "https://www.freeiconspng.com/uploads/blue-heart-icon-png-17.png";
 let num = 1;
 function animate() {
   x = 0;
-  ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (num == 1) {
     drawVisualizer1(barHeight, barWidth, bufferLength, dataArray);
   } else if (num == 2) {
-    canvas.clientWidth = 2000;
-    barWidth = canvas.clientWidth / 2 / bufferLength;
+    barWidth = canvas.width / 2 / bufferLength;
     drawVisualizer2(barHeight, barWidth, bufferLength, dataArray);
   } else if (num == 3) {
     drawVisualizer3(barHeight, barWidth, bufferLength, dataArray);
@@ -107,19 +113,19 @@ function drawVisualizer1(barHeight, barWidth, bufferLength, dataArray) {
   ctx.shadowBlur = 0;
   ctx.shadowColor = "";
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 0.7;
+    barHeight = (dataArray[i] * (canvas.width + canvas.height)) / 2000;
     ctx.save();
-    ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(i * 4);
     ctx.drawImage(particles, 0, barHeight, barHeight / 2.5, barHeight / 2.5);
     x += barWidth;
     ctx.restore();
   }
-  let size = dataArray[15] * 1.5 > 100 ? dataArray[15] : 100;
+  let size = dataArray[15] * 1.5 > 70 ? dataArray[15] : 70;
   ctx.drawImage(
     center,
-    canvas.clientWidth / 2 - size / 2,
-    canvas.clientHeight / 2 - size / 2,
+    canvas.width / 2 - size / 2,
+    canvas.height / 2 - size / 2,
     size,
     size
   );
@@ -131,22 +137,22 @@ function drawVisualizer2(barHeight, barWidth, bufferLength, dataArray) {
   ctx.shadowBlur = 0;
   ctx.shadowColor = "";
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 1.3;
+    barHeight = (dataArray[i] * (canvas.width + canvas.height)) / 900;
     const hue = 5 + i * 2;
     ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
     ctx.fillRect(
-      canvas.clientWidth / 2 - x,
-      canvas.clientHeight - barHeight,
-      barWidth,
+      canvas.width / 2 - x,
+      canvas.height - barHeight,
+      barWidth + 1,
       barHeight
     );
     x += barWidth;
   }
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 1.3;
+    barHeight = (dataArray[i] * (canvas.width + canvas.height)) / 900;
     const hue = 5 + i * 2;
     ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
-    ctx.fillRect(x, canvas.clientHeight - barHeight, barWidth, barHeight);
+    ctx.fillRect(x, canvas.height - barHeight, barWidth + 1, barHeight);
     x += barWidth;
   }
 }
@@ -157,9 +163,9 @@ function drawVisualizer3(barHeight, barWidth, bufferLength, dataArray) {
   ctx.shadowBlur = 5;
   ctx.shadowColor = "black";
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 0.8;
+    barHeight = (dataArray[i] * (canvas.width + canvas.height)) / 2000;
     ctx.save();
-    ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(i * 10);
 
     ctx.lineWidth = barHeight / 4;
@@ -185,9 +191,9 @@ function drawVisualizer4(barHeight, barWidth, bufferLength, dataArray) {
   ctx.shadowOffsetY = 5;
   ctx.shadowBlur = 0;
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] * 0.8;
+    barHeight = (dataArray[i] * (canvas.width + canvas.height)) / 2000;
     ctx.save();
-    ctx.translate(canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(i * bufferLength);
     const hue = i * 2;
     ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
